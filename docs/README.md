@@ -8,7 +8,7 @@
   </tr>
   <tr>
     <td rowspan="4">Users</td>
-    <td><a href="docs/interfaces/USERS.md">users.sign_up</a></td>
+    <td><a href="./interfaces/USERS.md">users.sign_up</a></td>
     <td>회원 가입</td>
   </tr>
   <tr>
