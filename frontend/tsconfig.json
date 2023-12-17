@@ -13,8 +13,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "./",
+    "rootDir": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@udtt/*": ["src/*"],
+      "@udtt-libs/*": ["libs/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

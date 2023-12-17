@@ -12,11 +12,14 @@
     "test:cov": "jest --coverage"
   },
   "dependencies": {
+    "jest-environment-jsdom": "^29.7.0",
     "next": "14.0.2",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
     "@types/jest": "^29.5.11",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -31,12 +34,20 @@
     "moduleFileExtensions": [
       "js",
       "json",
-      "ts"
+      "ts",
+      "tsx"
     ],
     "rootDir": ".",
-    "testRegex": ".*\\.spec\\.ts$",
+    "testRegex": ".*\\.spec\\.(tsx|ts)$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.(js|jsx|ts|tsx)$": [
+        "babel-jest",
+        {
+          "presets": [
+            "next/babel"
+          ]
+        }
+      ]
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
@@ -48,6 +59,9 @@
       "^@udtt-test/(.*)$": "<rootDir>/test/$1",
       "^@udtt-config/(.*)$": "<rootDir>/config/$1"
     },
-    "testEnvironment": "node"
+    "testEnvironment": "jest-environment-jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.ts"
+    ]
   }
 }
