@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
+import { PrismaModule } from '@udtt-libs/prisma';
 import { UserModule } from '@udtt/rest/users/user.module';
 
 @Module({
-  imports: [UserModule],
+  imports: [PrismaModule, UserModule],
   controllers: [],
   providers: [],
 })

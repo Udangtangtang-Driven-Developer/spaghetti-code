@@ -7,6 +7,7 @@ async function bootstrap() {
 
   ConfigureApplication(app);
 
+  app.enableShutdownHooks();
   await app.listen(3000);
 }
 
