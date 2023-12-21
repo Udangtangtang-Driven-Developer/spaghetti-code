@@ -1,7 +1,10 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { patchNestJsSwagger } from 'nestjs-zod';
 
 export function configureOpenAPI(app: INestApplication) {
+  patchNestJsSwagger();
+
   const options = new DocumentBuilder()
     .setTitle('UDTT API')
     .setDescription('The UDTT API description')

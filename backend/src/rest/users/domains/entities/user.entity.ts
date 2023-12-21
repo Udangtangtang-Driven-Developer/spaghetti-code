@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsDate, IsEmail, IsInt, IsOptional, IsString, validate } from 'class-validator';
+import { IsDate, IsEmail, IsInt, IsOptional, IsString, validateSync } from 'class-validator';
 
 export interface IUser {
   id?: number;
@@ -61,9 +61,9 @@ export class User {
     this._city = user.city;
   }
 
-  public static async new(user: NewUserParams): Promise<User> {
+  public static new(user: NewUserParams): User {
     const entity = new User({ ...user, id: 1 });
-    const errors = await validate(entity);
+    const errors = validateSync(entity);
     if (errors.length > 0) throw new Error('Validation failed!');
 
     return entity;

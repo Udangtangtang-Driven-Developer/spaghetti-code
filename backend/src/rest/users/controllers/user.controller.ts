@@ -1,19 +1,18 @@
-import { Controller, Post } from '@nestjs/common';
-import { ResponseEntity } from '@udtt-libs/dto';
+import { Body, Controller, Post } from '@nestjs/common';
+import { SignupReq } from '@udtt/rest/users/dtos/req';
+import { SignupRes } from '@udtt/rest/users/dtos/res';
 import { UserService } from '@udtt/rest/users/services';
+import { ZodSerializerDto } from 'nestjs-zod';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly _userService: UserService) {}
 
+  @ZodSerializerDto(SignupRes)
   @Post('signup')
-  public async signup() {
-    const newUser = await this._userService.signup();
-
-    return ResponseEntity.OK_WITH({
-      status: 201,
-      message: 'User created successfully',
-      data: newUser,
-    });
+  public async signup(@Body() body: SignupReq) {
+    console.log(body);
+    const createdUser = await this._userService.signup();
+    return SignupRes.from(createdUser);
   }
 }
