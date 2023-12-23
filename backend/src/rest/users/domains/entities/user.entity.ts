@@ -1,53 +1,20 @@
-import { Exclude, Expose } from 'class-transformer';
-import { IsDate, IsEmail, IsInt, IsOptional, IsString, validateSync } from 'class-validator';
-
-export interface IUser {
-  id?: number;
-  nickname: string;
-  email: string;
-  password: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  country: string;
-  city: string;
-}
-
-export type NewUserParams = Omit<IUser, 'id' | 'createdAt' | 'updatedAt'>;
+import { IUser, NewUserParams } from '@udtt/rest/users/domains/types';
 
 export class User {
-  @IsOptional()
-  @IsInt()
-  @Exclude()
   private _id?: number;
 
-  @IsString()
-  @Exclude()
   private _nickname: string;
 
-  @IsEmail()
-  @Exclude()
   private _email: string;
 
-  @IsString()
-  @Exclude()
   private _password: string;
 
-  @IsOptional()
-  @IsDate()
-  @Exclude()
   private _createdAt?: Date;
 
-  @IsOptional()
-  @IsDate()
-  @Exclude()
   private _updatedAt?: Date;
 
-  @IsString()
-  @Exclude()
   private _country: string;
 
-  @IsString()
-  @Exclude()
   private _city: string;
 
   constructor(user: IUser) {
@@ -62,25 +29,24 @@ export class User {
   }
 
   public static new(user: NewUserParams): User {
-    const entity = new User({ ...user, id: 1 });
-    const errors = validateSync(entity);
-    if (errors.length > 0) throw new Error('Validation failed!');
+    const entity = new User({ ...user });
 
     return entity;
   }
 
-  @Expose()
+  public static from(user: IUser): User {
+    return new User(user);
+  }
+
   get id(): number {
     if (!this._id) throw new Error('User identifier is not defined');
     return this._id;
   }
 
-  @Expose()
   get nickname(): string {
     return this._nickname;
   }
 
-  @Expose()
   get email(): string {
     return this._email;
   }
@@ -89,24 +55,20 @@ export class User {
     return this._password;
   }
 
-  @Expose()
   get createdAt(): Date {
     if (!this._createdAt) throw new Error('User creation date is not defined');
     return this._createdAt;
   }
 
-  @Expose()
   get updatedAt(): Date {
     if (!this._updatedAt) throw new Error('User update date is not defined');
     return this._updatedAt;
   }
 
-  @Expose()
   get country(): string {
     return this._country;
   }
 
-  @Expose()
   get city(): string {
     return this._city;
   }

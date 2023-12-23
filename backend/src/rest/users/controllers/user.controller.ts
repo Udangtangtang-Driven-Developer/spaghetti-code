@@ -11,8 +11,7 @@ export class UserController {
   @ZodSerializerDto(SignupRes)
   @Post('signup')
   public async signup(@Body() body: SignupReq) {
-    console.log(body);
-    const createdUser = await this._userService.signup();
+    const createdUser = await this._userService.signup(SignupReq.toEntity(body));
     return SignupRes.from(createdUser);
   }
 }
