@@ -1,8 +1,12 @@
 import Greeting from "@udtt/components/Greeting";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import Todo from "@udtt/components/Todo";
 
 export default function Home() {
-  return <Greeting />;
+  return (
+    <>
+      <Greeting />
+
+      <Todo />
+    </>
+  );
 }
