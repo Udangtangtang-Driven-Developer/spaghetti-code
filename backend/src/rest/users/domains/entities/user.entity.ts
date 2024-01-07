@@ -5,9 +5,15 @@ export class User {
 
   private _nickname: string;
 
+  private _firstName: string;
+
+  private _lastName: string;
+
   private _email: string;
 
   private _password: string;
+
+  private _passwordConfirm: string;
 
   private _createdAt?: Date;
 
@@ -22,6 +28,9 @@ export class User {
     this._nickname = user.nickname;
     this._email = user.email;
     this._password = user.password;
+    this._passwordConfirm = user.passwordConfirm;
+    this._firstName = user.firstName;
+    this._lastName = user.lastName;
     this._createdAt = user.createdAt || new Date();
     this._updatedAt = user.updatedAt || new Date();
     this._country = user.country;
@@ -55,6 +64,10 @@ export class User {
     return this._password;
   }
 
+  get passwordConfirm(): string {
+    return this._passwordConfirm;
+  }
+
   get createdAt(): Date {
     if (!this._createdAt) throw new Error('User creation date is not defined');
     return this._createdAt;
@@ -71,5 +84,17 @@ export class User {
 
   get city(): string {
     return this._city;
+  }
+
+  get firstName(): string {
+    return this._firstName;
+  }
+
+  get lastName(): string {
+    return this._lastName;
+  }
+
+  get fullName(): string {
+    return `${this._firstName} ${this._lastName}`;
   }
 }

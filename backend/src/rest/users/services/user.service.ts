@@ -15,6 +15,9 @@ export class UserService {
           city: user.city,
           country: user.country,
           password: user.password,
+          passwordConfirm: user.passwordConfirm,
+          firstName: user.firstName,
+          lastName: user.lastName,
         },
       })
       .then(User.from);
